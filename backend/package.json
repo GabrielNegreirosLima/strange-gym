@@ -1,0 +1,27 @@
+{
+  "name": "strange-gym",
+  "version": "1.0.0",
+  "description": "server.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielNegreirosLima/strange-gym.git"
+  },
+  "author": "GabrielNegreirosLima and heitor-amaral",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielNegreirosLima/strange-gym/issues"
+  },
+  "homepage": "https://github.com/GabrielNegreirosLima/strange-gym#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.4.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5"
+  }
+}
