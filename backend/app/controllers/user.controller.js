@@ -1,11 +1,11 @@
 const db = require("../models");
-const Tutorial = db.tutorials;
+const User = db.users;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
 exports.create = (req, res) => {
   
-  if (!req.body.name) {
+  if (!req.body.username || !req.body.password || !req.body.enum_user) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -13,7 +13,9 @@ exports.create = (req, res) => {
   }
 
   const user = {
-    name: req.body.name
+    username: req.body.username,
+	password: req.body.password,
+	enum_user: req.body.enum_user
   };
 
   User.create(user)
@@ -23,14 +25,24 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the User."
       });
     });
 };
 
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
-  
+
+  User.findAll()
+	.then(data => {
+		res.send(data);
+	})
+	.catch(err => {
+	  res.status(500).send({
+		message: 
+		  err.message || "Some error occurred while getting all the Users."
+	  });
+	});
 };
 
 // Find a single User with an id
