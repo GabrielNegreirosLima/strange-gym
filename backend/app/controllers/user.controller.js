@@ -1,11 +1,12 @@
 const db = require("../models");
 const User = db.users;
+const Doctor = db.doctors;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
 exports.create = (req, res) => {
   
-  if (!req.body.username || !req.body.password || !req.body.enum_user) {
+  if (!req.body.username || !req.body.password) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -17,6 +18,29 @@ exports.create = (req, res) => {
 	password: req.body.password,
 	enum_user: req.body.enum_user
   };
+
+  switch(user.enum_user) {
+  	case 0:
+      const doctor = {
+	    name: req.body.doctor.name
+	  }
+	  
+	  console.log(doctor)
+
+  	  Doctor.create(doctor).catch(err => {
+      	res.status(500).send({
+          message:
+      	  err.message || "Some error occurred while creating the User."
+        });
+      });
+      break;
+  	case 1:
+      break;
+  	case 2:
+      break;
+  	case 3:
+      break;
+  } 
 
   User.create(user)
     .then(data => {
