@@ -1,57 +1,75 @@
 const db = require("../models");
+const { QueryTypes } = require('sequelize');
 const User = db.users;
 const Doctor = db.doctors;
 const Op = db.Sequelize.Op;
+const doctorController = require("./doctor.controller.js");
+
+// Checks if the user exists
+function checkPastUser(req, res){
+
+	// How to code SQL Injection:
+	const check = db.sequelize.query(
+		`SELECT * FROM users WHERE username='${req.body.username}'`, 
+		{ type: QueryTypes.SELECT }
+	)
+	.then(data => {
+		if(data.length !== 0){ 
+			res.status(500).send({
+				message: "This user already exists!"
+			});
+		}
+		return;
+	})
+	.catch(err => {
+		res.status(500).send({
+			message: 
+			err.message || "Some error occurred while checking if the user exists"
+		});
+	});
+}
 
 // Create and Save a new User
 exports.create = (req, res) => {
   
-  if (!req.body.username || !req.body.password) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
-  }
+	if (!req.body.username || !req.body.password) {
+		res.status(400).send({
+			message: "Content can not be empty!"
+		});
+		return;
+	}
 
-  const user = {
-    username: req.body.username,
-	password: req.body.password,
-	enum_user: req.body.enum_user
-  };
+	const user = {
+		username: req.body.username,
+		password: req.body.password,
+		enum_user: req.body.enum_user
+	};
 
-  switch(user.enum_user) {
-  	case 0:
-      const doctor = {
-	    name: req.body.doctor.name
-	  }
-	  
-	  console.log(doctor)
+	checkPastUser(req, res);
 
-  	  Doctor.create(doctor).catch(err => {
-      	res.status(500).send({
-          message:
-      	  err.message || "Some error occurred while creating the User."
-        });
-      });
-      break;
-  	case 1:
-      break;
-  	case 2:
-      break;
-  	case 3:
-      break;
-  } 
+	User.create(user)
+		.then(data => {
+			res.send(data);
+		})
+		.catch(err => {
+		res.status(500).send({
+			message: 
+				err.message || "Some error occurred while creating the User."
+			});
+		});
+		
+	switch(user.enum_user) {
+		case 0:
+			doctorController.createDoctor(req, res);
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+	} 
 
-  User.create(user)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the User."
-      });
-    });
 };
 
 // Retrieve all Users from the database.
