@@ -1,20 +1,21 @@
 const db = require("../models")
-const Doctor = db.doctors
-const User = db.users
-
-Doctor.hasOne(User, { foreignKey: 'owner_id' })
+const Doctor = db.doctor
+const User = db.user
 
 // Create a Doctor
 exports.createDoctor = function(req, res){	
 	const doctor = {
 		name: req.body.doctor.name
 	}
-	console.log(doctor)
 
-	Doctor.create(doctor).catch(err => {
+	Doctor.create(doctor)
+	.then(data => {
+		res.send({ data, message: "Doctor successfully inserted"})
+	})
+	.catch(err => {
       	res.status(500).send({
         	message:
-      		err.message || "Some error occurred while creating the User."
+				err.message || "Some error occurred while creating the User."
 		});
 	});
 }
