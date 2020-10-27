@@ -19,12 +19,12 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.users = require("./user.model.js")(sequelize, Sequelize);
-db.doctors = require("./doctor.model.js")(sequelize, Sequelize);
+db.user = require("../models/user.model.js")(sequelize, Sequelize);
+db.doctor = require("./doctor.model.js")(sequelize, Sequelize);
 
-db.users.hasMany(db.doctors, { as: "doctor" });
-db.doctors.belongsTo(db.users, {
-  foreignKey: "usersId",
+db.user.hasMany(db.doctor, { as: "doctor" });
+db.doctor.belongsTo(db.user, {
+  foreignKey: "userId",
   as: "user",
 });
 

@@ -25,8 +25,10 @@ app.get("/ping", (req, res) => {
   res.json({ message: "pong!" });
 });
 
+//Routes
 require("./app/routes/user.routes")(app);
 require("./app/routes/doctor.routes")(app);
+require('./app/routes/auth.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
