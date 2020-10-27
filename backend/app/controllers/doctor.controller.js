@@ -1,5 +1,8 @@
 const db = require("../models")
 const Doctor = db.doctors
+const User = db.users
+
+Doctor.hasOne(User, { foreignKey: 'owner_id' })
 
 // Create a Doctor
 exports.createDoctor = function(req, res){	
@@ -35,7 +38,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
-	Doctor.findByPk(id)
+	Doctor.findByPk(id, { include: [User] })
 	.then(data => {
 		res.send(data);
 	})

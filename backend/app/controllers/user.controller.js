@@ -5,12 +5,6 @@ const Doctor = db.doctors;
 const Op = db.Sequelize.Op;
 const doctorController = require("./doctor.controller.js");
 
-// Checks if the user exists
-function checkPastUser(req, res){
-
-
-}
-
 // Create and Save a new User
 exports.create = (req, res) => {
   
