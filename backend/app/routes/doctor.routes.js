@@ -4,12 +4,10 @@ module.exports = app => {
 
 	var router = require("express").Router();
 
-	router.post("/", users.create);
 	router.get("/", users.findAll);
 	router.get("/:id", users.findOne);
 	router.put("/:id", users.update);
-	// the 2 routes below cannot be exposed
-	// router.delete("/:id", users.delete);
-	// router.delete("/", users.deleteAll);
+	router.delete("/:id", users.delete);
+	router.delete("/", users.deleteAll);
 	app.use('/api/users', router);
 };
