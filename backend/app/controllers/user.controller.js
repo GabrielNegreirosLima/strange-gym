@@ -129,7 +129,7 @@ exports.update = (req, res) => {
 	});
 };
 
-// Delete a User with the specified id in the request
+// NOT PUBLIC: Delete a User with the specified id in the request
 exports.delete = (req, res) => {
 
 	const id = req.params.id
@@ -152,7 +152,7 @@ exports.delete = (req, res) => {
 	});
 };
 
-// Delete all Users from the database.
+// NOT PUBLIC: Delete all Users from the database.
 exports.deleteAll = (req, res) => {
 	
 	const id = req.params.id
