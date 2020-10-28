@@ -22,17 +22,12 @@ db.sequelize = sequelize;
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.doctor = require("./doctor.model.js")(sequelize, Sequelize);
 db.student = require("./student.model.js")(sequelize, Sequelize);
+db.teacher = require("./teacher.model.js")(sequelize, Sequelize);
 
 db.user.hasMany(db.doctor, { as: "doctor" });
 db.user.hasMany(db.student, { as: "student" });
-db.doctor.belongsTo(db.user, {
-  foreignKey: "userId",
-  as: "user",
-});
-db.student.belongsTo(db.user, {
-  foreignKey: "userId",
-  as: "user",
-});
+db.user.hasMany(db.student, { as: "teacher" });
+
 
 module.exports = db;
 

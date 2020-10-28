@@ -2,6 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const Doctor = require("./doctor.controller.js");
 const Student = require("./student.controller.js");
+const Teacher = require("./teacher.controller.js");
 const User = db.user;
 const Role = db.role;
 
@@ -30,6 +31,8 @@ exports.signup = (req, res) => {
 				res.send({ message: "Student was registered successfully!", user: user });
 				break;
 			case 2:
+				Teacher.createTeacher(req, res);
+				res.send({ message: "Teacher was registered successfully!", user: user });
 				break;
 			case 3:
 				break;

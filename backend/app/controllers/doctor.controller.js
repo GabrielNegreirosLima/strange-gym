@@ -11,7 +11,7 @@ exports.createDoctor = function(req, res){
 	.catch(err => {
       	res.status(500).send({
         	message:
-				err.message || "Some error occurred while creating the User."
+				err.message || "Some error occurred while creating the Doctor."
 		});
 	});
 
@@ -27,7 +27,7 @@ exports.findAll = (req, res) => {
 	.catch(err => {
 	  res.status(500).send({
 		message: 
-		  err.message || "Some error occurred while getting all the Users."
+		  err.message || "Some error occurred while getting all the Doctor."
 	  });
 	});
 };
@@ -45,7 +45,7 @@ exports.findOne = (req, res) => {
 	})
 	.catch(err => {
 		res.status(500).send({
-			message: "Error retrieving User with id=" + id
+			message: "Error retrieving Doctor with id=" + id
 		});	
 	});
 };
