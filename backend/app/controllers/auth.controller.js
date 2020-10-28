@@ -1,5 +1,7 @@
 const db = require("../models");
 const config = require("../config/auth.config");
+const Doctor = require("./doctor.controller.js");
+const Student = require("./student.controller.js");
 const User = db.user;
 const Role = db.role;
 
@@ -9,18 +11,35 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-  // Save User to Database
-  User.create({
-    username: req.body.username,
-    password: bcrypt.hashSync(req.body.password, 8),
-    enum_user: req.body.enum_user
-  })
-    .then(user => {
-      res.send({ message: "User was registered successfully!", user: user });
-    })
-    .catch(err => {
-      res.status(500).send({ message: err.message });
+  	
+	// Save User to Database
+	User.create({
+		username: req.body.username,
+		password: bcrypt.hashSync(req.body.password, 8),
+		enum_user: req.body.enum_user
+	})
+	.then(user => {
+		
+		switch(req.body.enum_user) {
+			case 0:
+				Doctor.createDoctor(req, res);
+				res.send({ message: "Doctor was registered successfully!", user: user });
+				break;
+			case 1:
+				Student.createStudent(req, res);
+				res.send({ message: "Student was registered successfully!", user: user });
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+		} 
+
+	})
+	.catch(err => {
+		res.status(500).send({ message: err.message });
     });
+	
 };
 
 exports.signin = (req, res) => {

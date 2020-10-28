@@ -1,6 +1,5 @@
 const db = require("../models")
 const Doctor = db.doctor
-const User = db.user
 
 // Create a Doctor
 exports.createDoctor = function(req, res){	
@@ -9,15 +8,13 @@ exports.createDoctor = function(req, res){
 	}
 
 	Doctor.create(doctor)
-	.then(data => {
-		res.send({ data, message: "Doctor successfully inserted"})
-	})
 	.catch(err => {
       	res.status(500).send({
         	message:
 				err.message || "Some error occurred while creating the User."
 		});
 	});
+
 }
 
 // Retrieve all Doctors from the database.
@@ -39,7 +36,10 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
-	Doctor.findByPk(id, { include: [User] })
+	Doctor.find({ 
+		where: { id: id },
+		include: [User] 
+	})
 	.then(data => {
 		res.send(data);
 	})
