@@ -12,37 +12,38 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-  	
-	// Save User to Database
-	User.create({
-		username: req.body.username,
-		password: bcrypt.hashSync(req.body.password, 8),
-		enum_user: req.body.enum_user
-	})
-	.then(user => {
-		
-		switch(req.body.enum_user) {
-			case 0:
-				Doctor.createDoctor(req, res);
-				res.send({ message: "Doctor was registered successfully!", user: user });
-				break;
-			case 1:
-				Student.createStudent(req, res);
-				res.send({ message: "Student was registered successfully!", user: user });
-				break;
-			case 2:
-				Teacher.createTeacher(req, res);
-				res.send({ message: "Teacher was registered successfully!", user: user });
-				break;
-			case 3:
-				break;
-		} 
 
-	})
-	.catch(err => {
-		res.status(500).send({ message: err.message });
+  const enum_user_number = Number(req.body.enum_user)
+  // Save User to Database
+  User.create({
+    username: req.body.username,
+    password: bcrypt.hashSync(req.body.password, 8),
+    enum_user: enum_user_number
+  })
+    .then(user => {
+
+      switch (enum_user_number) {
+        case 0:
+          Student.createStudent(req, res);
+          res.send({ message: "Student was registered successfully!", user: user });
+          break;
+        case 1:
+          Teacher.createTeacher(req, res);
+          res.send({ message: "Teacher was registered successfully!", user: user });
+          break;
+        case 2:
+          break;
+        case 3:
+          Doctor.createDoctor(req, res);
+          res.send({ message: "Doctor was registered successfully!", user: user });
+          break;
+      }
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
     });
-	
+
 };
 
 exports.signin = (req, res) => {
@@ -72,10 +73,10 @@ exports.signin = (req, res) => {
         expiresIn: 86400 // 24 hours
       });
 
+      delete user.password;
+
       res.status(200).send({
-        id: user.id,
-        username: user.username,
-        role: user.enum_user,
+        user: user,
         accessToken: token
       });
     })
