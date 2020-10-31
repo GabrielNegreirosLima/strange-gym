@@ -1,53 +1,53 @@
+d	console.log("DALE: ", secretary)
 const db = require("../models")
-const Doctor = db.doctor
+const Secretary = db.secretary
+const User = db.user
 
-// Create a Doctor
-exports.createDoctor = function (req, res) {
-	const doctor = {
+// Create a Secretary
+exports.createSecretary = function (req, res) {
+	const secretary = {
 		name: req.body.name
 	}
 
-
-	Doctor.create(doctor)
+	Secretary.create(secretary)
 		.catch(err => {
 			res.status(500).send({
 				message:
-					err.message || "Some error occurred while creating the User."
+					err.message || "Some error occurred while creating the Secretary."
 			});
 		});
-
 }
 
-// Retrieve all Doctors from the database.
+// Retrieve all Secretarys from the database.
 exports.findAll = (req, res) => {
 
-	Doctor.findAll()
+	Secretary.findAll()
 		.then(data => {
 			res.send(data);
 		})
 		.catch(err => {
 			res.status(500).send({
 				message:
-					err.message || "Some error occurred while getting all the Users."
+					err.message || "Some error occurred while getting all the Secretary."
 			});
 		});
 };
 
-// Find a single Doctor with an id
+// Find a single Secretary with an id
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
-	Doctor.find({
+	Secretary.findOne({
 		where: { id: id },
 		include: [User]
 	})
-		.then(data => {
-			res.send(data);
-		})
-		.catch(err => {
-			res.status(500).send({
-				message: "Error retrieving User with id=" + id
-			});
+	.then(data => {
+		res.send(data);
+	})
+	.catch(err => {
+		res.status(500).send({
+			message: "Error retrieving Secretary with id=" + id
 		});
+	});
 };
 

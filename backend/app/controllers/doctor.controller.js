@@ -7,8 +7,6 @@ exports.createDoctor = function (req, res) {
 		name: req.body.name
 	}
 
-	console.log("\n\n asdfjlajfdkljalkfjlkadjs \n\n")
-
 	Doctor.create(doctor)
 		.catch(err => {
 			res.status(500).send({

@@ -28,7 +28,7 @@ db.secretary = require("./secretary.model.js")(sequelize, Sequelize);
 db.user.hasMany(db.doctor, { as: "doctor" });
 db.user.hasMany(db.student, { as: "student" });
 db.user.hasMany(db.teacher, { as: "teacher" });
-db.user.hasMany(db.secretary, { as: "teacher" });
+db.user.hasMany(db.secretary, { as: "secretary" });
 
 
 module.exports = db;

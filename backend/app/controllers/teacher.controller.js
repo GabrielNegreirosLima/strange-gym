@@ -4,7 +4,7 @@ const Teacher = db.teacher
 // Create a Teacher
 exports.createTeacher = function(req, res){	
 	const teacher = {
-		name: req.body.teacher.name
+		name: req.body.name
 	}
 
 	Teacher.create(teacher)
