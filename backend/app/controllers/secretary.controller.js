@@ -1,12 +1,12 @@
-d	console.log("DALE: ", secretary)
 const db = require("../models")
 const Secretary = db.secretary
 const User = db.user
 
 // Create a Secretary
-exports.createSecretary = function (req, res) {
+exports.createSecretary = function (req, res, userid) {
 	const secretary = {
-		name: req.body.name
+		name: req.body.name,
+		userId: userid
 	}
 
 	Secretary.create(secretary)
@@ -36,10 +36,10 @@ exports.findAll = (req, res) => {
 // Find a single Secretary with an id
 exports.findOne = (req, res) => {
 	const id = req.params.id;
+	console.log("this's my ID mam: ", id)
 
 	Secretary.findOne({
-		where: { id: id },
-		include: [User]
+		where: { id: id }
 	})
 	.then(data => {
 		res.send(data);

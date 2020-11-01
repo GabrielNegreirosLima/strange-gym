@@ -2,9 +2,10 @@ const db = require("../models")
 const Teacher = db.teacher
 
 // Create a Teacher
-exports.createTeacher = function(req, res){	
+exports.createTeacher = function(req, res, userid){	
 	const teacher = {
-		name: req.body.name
+		name: req.body.name,
+		userId: userid
 	}
 
 	Teacher.create(teacher)
@@ -36,9 +37,8 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
-	Teacher.find({ 
-		where: { id: id },
-		include: [User] 
+	Teacher.findOne({ 
+		where: { id: id }
 	})
 	.then(data => {
 		res.send(data);

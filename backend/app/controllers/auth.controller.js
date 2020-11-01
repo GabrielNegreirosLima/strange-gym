@@ -25,28 +25,28 @@ exports.signup = (req, res) => {
     .then(user => {
 		switch (enum_user_number) {
 	        case 0:
-				Student.createStudent(req, res);
+				Student.createStudent(req, res, user.id);
 				res.send({ 
 					message: "Student was registered successfully!", 
 					user: user 
 				});
 				break;
 	        case 1:
-				Teacher.createTeacher(req, res);
+				Teacher.createTeacher(req, res, user.id);
 				res.send({ 
 					message: "Teacher was registered successfully!", 
 					user: user 
 				});
 				break;
 	        case 2:
-				Secretary.createSecretary(req, res);
+				Secretary.createSecretary(req, res, user.id);
 				res.send({ 
 					message: "Secretary was registered sucessfully!", 
 					user: user
 				})
 				break;
 	        case 3:
-				Doctor.createDoctor(req, res);
+				Doctor.createDoctor(req, res, user.id);
 				res.send({ 
 					message: "Doctor was registered successfully!", 
 					user: user 
