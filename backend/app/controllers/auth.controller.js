@@ -3,6 +3,7 @@ const config = require("../config/auth.config");
 const Doctor = require("./doctor.controller.js");
 const Student = require("./student.controller.js");
 const Teacher = require("./teacher.controller.js");
+const Secretary = require("./secretary.controller.js");
 const User = db.user;
 const Role = db.role;
 
@@ -13,31 +14,45 @@ const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
 
-  const enum_user_number = Number(req.body.enum_user)
-  // Save User to Database
-  User.create({
-    username: req.body.username,
-    password: bcrypt.hashSync(req.body.password, 8),
-    enum_user: enum_user_number
-  })
+	const enum_user_number = Number(req.body.enum_user)
+	
+	// Save User to Database
+	User.create({
+    	username: req.body.username,
+	    password: bcrypt.hashSync(req.body.password, 8),
+    	enum_user: enum_user_number
+	})
     .then(user => {
-
-      switch (enum_user_number) {
-        case 0:
-          Student.createStudent(req, res);
-          res.send({ message: "Student was registered successfully!", user: user });
-          break;
-        case 1:
-          Teacher.createTeacher(req, res);
-          res.send({ message: "Teacher was registered successfully!", user: user });
-          break;
-        case 2:
-          break;
-        case 3:
-          Doctor.createDoctor(req, res);
-          res.send({ message: "Doctor was registered successfully!", user: user });
-          break;
-      }
+		switch (enum_user_number) {
+	        case 0:
+				Student.createStudent(req, res, user.id);
+				res.send({ 
+					message: "Student was registered successfully!", 
+					user: user 
+				});
+				break;
+	        case 1:
+				Teacher.createTeacher(req, res, user.id);
+				res.send({ 
+					message: "Teacher was registered successfully!", 
+					user: user 
+				});
+				break;
+	        case 2:
+				Secretary.createSecretary(req, res, user.id);
+				res.send({ 
+					message: "Secretary was registered sucessfully!", 
+					user: user
+				})
+				break;
+	        case 3:
+				Doctor.createDoctor(req, res, user.id);
+				res.send({ 
+					message: "Doctor was registered successfully!", 
+					user: user 
+				});
+				break;
+		}
 
     })
     .catch(err => {

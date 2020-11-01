@@ -25,11 +25,9 @@ db.student = require("./student.model.js")(sequelize, Sequelize);
 db.teacher = require("./teacher.model.js")(sequelize, Sequelize);
 db.secretary = require("./secretary.model.js")(sequelize, Sequelize);
 
-db.user.hasMany(db.doctor, { as: "doctor" });
-db.user.hasMany(db.student, { as: "student" });
-db.user.hasMany(db.teacher, { as: "teacher" });
-db.user.hasMany(db.secretary, { as: "teacher" });
+db.doctor.belongsTo(db.user);
+db.student.belongsTo(db.user);
+db.teacher.belongsTo(db.user);
+db.secretary.belongsTo(db.user);
 
-
-module.exports = db;
-
+module.exports = db

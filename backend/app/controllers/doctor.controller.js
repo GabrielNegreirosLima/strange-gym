@@ -2,12 +2,11 @@ const db = require("../models")
 const Doctor = db.doctor
 
 // Create a Doctor
-exports.createDoctor = function (req, res) {
+exports.createDoctor = function (req, res, userid) {
 	const doctor = {
-		name: req.body.name
+		name: req.body.name,
+		userId: userid
 	}
-
-	console.log("\n\n asdfjlajfdkljalkfjlkadjs \n\n")
 
 	Doctor.create(doctor)
 		.catch(err => {
@@ -38,17 +37,16 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
-	Doctor.find({
-		where: { id: id },
-		include: [User]
+	Doctor.findOne({
+		where: { id: id }
 	})
-		.then(data => {
-			res.send(data);
-		})
-		.catch(err => {
-			res.status(500).send({
-				message: "Error retrieving User with id=" + id
-			});
+	.then(data => {
+		res.send(data);
+	})
+	.catch(err => {
+		res.status(500).send({
+			message: "Error retrieving User with id=" + id
 		});
+	});
 };
 

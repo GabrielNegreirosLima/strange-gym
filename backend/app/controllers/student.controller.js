@@ -2,16 +2,17 @@ const db = require("../models")
 const Student = db.student
 
 // Create a Student
-exports.createStudent = function(req, res){	
+exports.createStudent = function(req, res, userid){	
 	const student = {
-		name: req.body.student.name,
-		cpf: req.body.student.cpf,
-		rg: req.body.student.rg,
-		birth_date: req.body.student.birth_date,
-		cred_card_number: req.body.student.cred_card_number,
-		cred_card_issuer: req.body.student.cred_card_issuer,
-		cred_card_name: req.body.student.cred_card_name,
-		cred_card_cvv: req.body.student.cred_card_cvv
+		name: req.body.name,
+		cpf: req.body.cpf,
+		rg: req.body.rg,
+		birth_date: req.body.birth_date,
+		cred_card_number: req.body.cred_card_number,
+		cred_card_issuer: req.body.cred_card_issuer,
+		cred_card_name: req.body.cred_card_name,
+		cred_card_cvv: req.body.cred_card_cvv,
+		userId: userid
 	}
 
 	Student.create(student)
@@ -43,7 +44,9 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
-	Student.findByPk(id, { include: [User] })
+	Student.findOne({
+		where: { id: id }
+	})
 	.then(data => {
 		res.send(data);
 	})

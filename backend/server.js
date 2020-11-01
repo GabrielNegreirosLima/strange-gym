@@ -12,9 +12,9 @@ const db = require("./app/models");
 db.sequelize.sync();
 
 /* For dev */
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+db.sequelize.sync({ force: true }).then(() => {
+   console.log("Drop and re-sync db.");
+});
 
 // simple route
 app.get("/ping", (req, res) => {
@@ -24,6 +24,9 @@ app.get("/ping", (req, res) => {
 //Routes
 require("./app/routes/user.routes")(app);
 require("./app/routes/doctor.routes")(app);
+require("./app/routes/student.routes")(app);
+require("./app/routes/secretary.routes")(app);
+require("./app/routes/teacher.routes")(app);
 require('./app/routes/auth.routes')(app);
 
 // set port, listen for requests
