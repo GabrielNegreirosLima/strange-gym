@@ -24,10 +24,14 @@ db.doctor = require("./doctor.model.js")(sequelize, Sequelize);
 db.student = require("./student.model.js")(sequelize, Sequelize);
 db.teacher = require("./teacher.model.js")(sequelize, Sequelize);
 db.secretary = require("./secretary.model.js")(sequelize, Sequelize);
+db.physicalFitnessTest = require("./physicalFitnessTest.model")(sequelize, Sequelize);
 
 db.doctor.belongsTo(db.user);
 db.student.belongsTo(db.user);
 db.teacher.belongsTo(db.user);
 db.secretary.belongsTo(db.user);
+
+db.physicalFitnessTest.belongsTo(db.doctor)
+db.physicalFitnessTest.belongsTo(db.student)
 
 module.exports = db
