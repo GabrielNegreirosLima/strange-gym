@@ -25,6 +25,9 @@ db.student = require("./student.model.js")(sequelize, Sequelize);
 db.teacher = require("./teacher.model.js")(sequelize, Sequelize);
 db.secretary = require("./secretary.model.js")(sequelize, Sequelize);
 db.physicalFitnessTest = require("./physicalFitnessTest.model")(sequelize, Sequelize);
+db.enrollment = require("./enrollment.model.js")(sequelize, Sequelize);
+db.plan = require("./plan.model.js")(sequelize, Sequelize);
+db.modality = require("./modality.model.js")(sequelize, Sequelize);
 
 db.doctor.belongsTo(db.user);
 db.student.belongsTo(db.user);
@@ -34,4 +37,10 @@ db.secretary.belongsTo(db.user);
 db.physicalFitnessTest.belongsTo(db.doctor)
 db.physicalFitnessTest.belongsTo(db.student)
 
+db.enrollment.belongsTo(db.student)
+db.enrollment.belongsTo(db.plan)
+
+const variable = db.plan.belongsTo(db.modality)
+
 module.exports = db
+
