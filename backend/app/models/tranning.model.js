@@ -5,6 +5,6 @@ module.exports = (sequelize, Sequelize) => {
 		}	
 	});
 
-	return Schedule;
+	return Tranning;
 };
 
