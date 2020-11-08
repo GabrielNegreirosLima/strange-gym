@@ -28,6 +28,8 @@ db.physicalFitnessTest = require("./physicalFitnessTest.model")(sequelize, Seque
 db.enrollment = require("./enrollment.model.js")(sequelize, Sequelize);
 db.plan = require("./plan.model.js")(sequelize, Sequelize);
 db.modality = require("./modality.model.js")(sequelize, Sequelize);
+db.schedule = require("./schedule.model.js")(sequelize, Sequelize);
+db.class = require("./class.model.js")(sequelize, Sequelize);
 
 db.doctor.belongsTo(db.user);
 db.student.belongsTo(db.user);
@@ -40,7 +42,10 @@ db.physicalFitnessTest.belongsTo(db.student)
 db.enrollment.belongsTo(db.student)
 db.enrollment.belongsTo(db.plan)
 
-const variable = db.plan.belongsTo(db.modality)
+db.plan.belongsTo(db.modality)
+
+db.class.belongsTo(db.modality)
+db.class.belongsTo(db.schedule)
 
 module.exports = db
 
