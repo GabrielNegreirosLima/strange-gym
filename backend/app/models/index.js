@@ -25,6 +25,13 @@ db.student = require("./student.model.js")(sequelize, Sequelize);
 db.teacher = require("./teacher.model.js")(sequelize, Sequelize);
 db.secretary = require("./secretary.model.js")(sequelize, Sequelize);
 db.physicalFitnessTest = require("./physicalFitnessTest.model")(sequelize, Sequelize);
+db.enrollment = require("./enrollment.model.js")(sequelize, Sequelize);
+db.plan = require("./plan.model.js")(sequelize, Sequelize);
+db.modality = require("./modality.model.js")(sequelize, Sequelize);
+db.schedule = require("./schedule.model.js")(sequelize, Sequelize);
+db.class = require("./class.model.js")(sequelize, Sequelize);
+db.enrollmentClass = require("./enrollment-class.model.js")(sequelize, Sequelize);
+db.tranning = require("./tranning.model.js")(sequelize, Sequelize);
 
 db.doctor.belongsTo(db.user);
 db.student.belongsTo(db.user);
@@ -34,4 +41,19 @@ db.secretary.belongsTo(db.user);
 db.physicalFitnessTest.belongsTo(db.doctor)
 db.physicalFitnessTest.belongsTo(db.student)
 
+db.enrollment.belongsTo(db.student)
+db.enrollment.belongsTo(db.plan)
+
+db.plan.belongsTo(db.modality)
+
+db.class.belongsTo(db.modality)
+db.class.belongsTo(db.schedule)
+
+db.enrollment.belongsToMany(db.class, { through: db.enrollmentClass })
+db.class.belongsToMany(db.enrollment, { through: db.enrollmentClass })
+
+db.tranning.belongsTo(db.enrollment)
+db.tranning.belongsTo(db.teacher)
+
 module.exports = db
+
