@@ -10,6 +10,9 @@ exports.createTraining = function (req, res, teacherId, enrollmentId) {
 	}
 
 	Training.create(Training)
+		.then(data => {
+			res.send(data);
+		})
 		.catch(err => {
 			res.status(500).send({
 				message:

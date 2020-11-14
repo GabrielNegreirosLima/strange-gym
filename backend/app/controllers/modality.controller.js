@@ -9,6 +9,9 @@ exports.createModality = function (req, res) {
 	}
 
 	Modality.create(modality)
+		.then(data => {
+			res.send(data);
+		})
 		.catch(err => {
 			res.status(500).send({
 				message:

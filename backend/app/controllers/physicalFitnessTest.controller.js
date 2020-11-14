@@ -15,6 +15,9 @@ exports.createPhysicalFitnessTest = function (req, res, doctorid, studentId) {
 	}
 
 	PhysicalFitnessTest.create(physicalFitnessTest)
+		.then(data => {
+			res.send(data);
+		})
 		.catch(err => {
 			res.status(500).send({
 				message:

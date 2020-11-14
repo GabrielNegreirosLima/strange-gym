@@ -1,7 +1,6 @@
 const db = require("../models")
 const Plan = db.plan
 
-
 // Create a Plan
 exports.createPlan = function (req, res, modalityId) {
 	const Plan = {
@@ -12,6 +11,9 @@ exports.createPlan = function (req, res, modalityId) {
 	}
 
 	Plan.create(Training)
+		.then(data => {
+			res.send(data);
+		})
 		.catch(err => {
 			res.status(500).send({
 				message:

@@ -10,6 +10,9 @@ exports.createSchedule = function (req, res) {
 	}
 
 	Schedule.create(schedule)
+		.then(data => {
+			res.send(data);
+		})
 		.catch(err => {
 			res.status(500).send({
 				message:
