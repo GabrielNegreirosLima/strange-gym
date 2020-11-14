@@ -1,6 +1,23 @@
 const db = require("../models")
 const Enrollment = db.enrollment
 
+// Create a Enrollment
+exports.createEnrollment = function (req, res, studentId, planId) {
+	const enrollment = {
+		studentId: studentId,
+		planId: planId
+	}
+
+	Enrollment.create(enrollment)
+		.catch(err => {
+			res.status(500).send({
+				message:
+					err.message ||
+					"Some error occurred while creating the Enrollment."
+			});
+		});
+}
+
 
 // Retrieve all Enrollment from the database.
 exports.findAll = (req, res) => {

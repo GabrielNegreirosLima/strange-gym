@@ -56,8 +56,8 @@ exports.update = (req, res) => {
 	const id = req.params.id
 	
 	Schedule.update({
-		ename: req.body.username,
-		password: req.body.password
+		day_of_week: req.body.day_of_week,
+		time: req.body.time
 	}, 
 	{
 		where: {
@@ -97,8 +97,4 @@ exports.delete = (req, res) => {
 	});
 };
 
-// NOT PUBLIC: Delete all Schedules from the database.
-exports.deleteAll = (req, res) => {
-	
-	const id = req.params.id
 
