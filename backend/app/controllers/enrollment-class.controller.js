@@ -1,27 +1,26 @@
 const db = require("../models")
-const Enrollment = db.enrollment
+const EnrollmentClass = db.enrollmentClass
 
-
-// Retrieve all Enrollment from the database.
+// Retrieve all EnrollmentClass from the database.
 exports.findAll = (req, res) => {
 
-	Enrollment.findAll()
+	EnrollmentClass.findAll()
 		.then(data => {
 			res.send(data);
 		})
 		.catch(err => {
 			res.status(500).send({
 				message:
-					err.message || "Some error occurred while getting all the Enrollments."
+					err.message || "Some error occurred while getting all the EnrollmentClasss."
 			});
 		});
 };
 
-// Find a single Enrollment with an id
+// Find a single EnrollmentClass with an id
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
-	Enrollment.findOne({
+	EnrollmentClass.findOne({
 		where: { id: id }
 	})
 		.then(data => {
@@ -29,7 +28,7 @@ exports.findOne = (req, res) => {
 		})
 		.catch(err => {
 			res.status(500).send({
-				message: "Error retrieving Enrollment with id=" + id
+				message: "Error retrieving EnrollmentClass with id=" + id
 			});
 		});
 };

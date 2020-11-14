@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
 			type: Sequelize.ENUM("monday", "thursday", "wednesday", "tuesday", "friday")
 		},
 		time: {
+			// Format: "2016-01-01 00:00:00+00:00"
 			type: Sequelize.DATE
 		}
 	});

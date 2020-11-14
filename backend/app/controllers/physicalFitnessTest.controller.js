@@ -24,7 +24,7 @@ exports.createPhysicalFitnessTest = function (req, res, doctorid, studentId) {
 		});
 }
 
-// Retrieve all Doctors from the database.
+// Retrieve all PhysicalFitnessTests from the database.
 exports.findAll = (req, res) => {
 
 	PhysicalFitnessTest.findAll()
@@ -39,7 +39,7 @@ exports.findAll = (req, res) => {
 		});
 };
 
-// Find a single Doctor with an id
+// Find a single PhysicalFitnessTests with an id
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
@@ -51,7 +51,7 @@ exports.findOne = (req, res) => {
 		})
 		.catch(err => {
 			res.status(500).send({
-				message: "Error retrieving User with id=" + id
+				message: "Error retrieving PhysicalFitnessTest with id=" + id
 			});
 		});
 };
