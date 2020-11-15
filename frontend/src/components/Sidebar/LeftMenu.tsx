@@ -39,6 +39,7 @@ const LeftMenuContainer = styled.div`
 	background-color: #fff;
 	box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.24);
 	position: fixed;
+	transition: 0.6s ease-in;
 `;
 
 const Container = styled.div`
