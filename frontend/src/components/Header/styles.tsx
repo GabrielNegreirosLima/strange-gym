@@ -15,14 +15,14 @@ export const Container = styled.div`
 export const Logo = styled.img.attrs({
 	src: process.env.PUBLIC_URL + "/assets/logo.png",
 })`
-	width: 100px;
-	height: 80px;
+	width: 50px;
+	height: 50px;
 	cursor: pointer;
 `;
 
 export const LogoCefet = styled.img.attrs({
 	src: process.env.PUBLIC_URL + "/assets/logo-cefetmg.png",
 })`
-	width: 90px;
-	height: 45px;
+	width: 50px;
+	height: 35px;
 `;

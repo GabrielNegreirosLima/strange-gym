@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 import styled from "styled-components";
-import MenuItem from "./SidebarItem/SidebarItem";
+import MenuItem from "./SidebarItem";
 
 const menuItens = [
 	{
@@ -24,7 +24,7 @@ const LeftMenu: React.FC<Props> = ({ open, close }) => {
 	return (
 		<LeftMenuContainer style={{ transform: `translateX(${expand}px)` }}>
 			<Container>
-				<FiX onClick={() => close(!open)} size={23} cursor="pointer" />
+				<FiX onClick={close} size={23} cursor="pointer" />
 			</Container>
 			{menuItens.map((menu) => (
 				<MenuItem key={menu.label} label={menu.label} />
