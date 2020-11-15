@@ -6,7 +6,8 @@ const Schedule = db.schedule
 exports.createSchedule = function (req, res) {
 	const schedule = {
 		day_of_week: req.body.day_of_week,
-		time: req.body.time
+		time_initial: req.body.time_initial,
+		time_end: req.body.time_end
 	}
 
 	Schedule.create(schedule)
