@@ -4,7 +4,7 @@ module.exports = app => {
 
 	var router = require("express").Router();
 
-	router.post("/", classes.createEnrollment)
+	router.post("/", classes.createClass);
 	router.get("/", classes.findAll);
 	router.get("/:id", classes.findOne);
 	

@@ -5,7 +5,7 @@ const Modality = db.modality
 // Create a Modality
 exports.createModality = function (req, res) {
 	const modality = {
-		name: req.body.name,
+		name: req.body.name
 	}
 
 	Modality.create(modality)

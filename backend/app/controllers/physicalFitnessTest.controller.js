@@ -2,16 +2,16 @@ const db = require("../models")
 const PhysicalFitnessTest = db.physicalFitnessTest
 
 // Create a PhysicalFitnessTest
-exports.createPhysicalFitnessTest = function (req, res, doctorid, studentId) {
+exports.createPhysicalFitnessTest = function (req, res) {
 	const physicalFitnessTest = {
 		weight: req.body.weight,
 		height: req.body.weight,
 		blood_pressure: req.body.weight,
 		body_fat_percentage: req.body.weight,
 		body_mass_percentage: req.body.weight,
-		result,
-		doctorId: doctorid,
-		studentId: studentId
+		result: req.body.result,
+		doctorId: req.body.doctorId,
+		studentId: req.body.studentId
 	}
 
 	PhysicalFitnessTest.create(physicalFitnessTest)

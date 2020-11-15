@@ -2,10 +2,10 @@ const db = require("../models")
 const Enrollment = db.enrollment
 
 // Create a Enrollment
-exports.createEnrollment = function (req, res, studentId, planId) {
+exports.createEnrollment = function (req, res) {
 	const enrollment = {
-		studentId: studentId,
-		planId: planId
+		studentId: req.body.studentId,
+		planId: req.body.plansId
 	}
 
 	Enrollment.create(enrollment)

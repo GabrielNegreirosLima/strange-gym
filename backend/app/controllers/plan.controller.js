@@ -2,15 +2,15 @@ const db = require("../models")
 const Plan = db.plan
 
 // Create a Plan
-exports.createPlan = function (req, res, modalityId) {
-	const Plan = {
-		modalityId: modalityId,
+exports.createPlan = function (req, res) {
+	const plan = {
+		modalityId: req.body.modalityId,
 		frequency: req.body.frequency,
-		billing_frequency: req.body.frequency,
+		billing_frequency: req.body.billing_frequency,
 		price: req.body.price
 	}
 
-	Plan.create(Training)
+	Plan.create(plan)
 		.then(data => {
 			res.send(data);
 		})

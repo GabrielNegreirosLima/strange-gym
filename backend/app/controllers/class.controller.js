@@ -1,15 +1,18 @@
 const db = require("../models")
-const Class = db._class
+const Class = db.class
 
 // Create a Class
-exports.createClass = function (req, res, modalityId, scheduleId) {
+exports.createClass = function (req, res) {
 	const _class = {
 		capacity: req.body.capacity,
-		modalityId: modalityId,
-		scheduleId: scheduleId
+		modalityId: req.body.modalityId,
+		scheduleId: req.body.scheduleId
 	}
 
 	Class.create(_class)
+		.then(data => {
+			res.send(data);
+		})
 		.catch(err => {
 			res.status(500).send({
 				message:

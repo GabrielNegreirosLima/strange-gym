@@ -2,11 +2,11 @@ const db = require("../models")
 const Training = db.training
 
 // Create a Training
-exports.createTraining = function (req, res, teacherId, enrollmentId) {
+exports.createTraining = function (req, res) {
 	const Training = {
 		description: req.body.description,
-		teacherId: teacherId,
-		enrollmentId: enrollmentId
+		teacherId: req.body.teacherId,
+		enrollmentId: req.body.enrollmentId
 	}
 
 	Training.create(Training)

@@ -9,12 +9,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
-//db.sequelize.sync();
+db.sequelize.sync();
 
-/* For dev */
+/* For dev 
 db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
-});
+});*/
 
 // simple route
 app.get("/ping", (req, res) => {
@@ -35,6 +35,7 @@ require("./app/routes/physicalFitnessTest.routes")(app);
 require("./app/routes/plan.routes")(app);
 require("./app/routes/schedule.routes")(app);
 require("./app/routes/training.routes")(app);
+require("./app/routes/class.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
