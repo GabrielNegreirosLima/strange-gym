@@ -2,19 +2,22 @@ const db = require("../models")
 const PhysicalFitnessTest = db.physicalFitnessTest
 
 // Create a PhysicalFitnessTest
-exports.createPhysicalFitnessTest = function (req, res, doctorid, studentId) {
+exports.createPhysicalFitnessTest = function (req, res) {
 	const physicalFitnessTest = {
 		weight: req.body.weight,
 		height: req.body.weight,
 		blood_pressure: req.body.weight,
 		body_fat_percentage: req.body.weight,
 		body_mass_percentage: req.body.weight,
-		result,
-		doctorId: doctorid,
-		studentId: studentId
+		result: req.body.result,
+		doctorId: req.body.doctorId,
+		studentId: req.body.studentId
 	}
 
 	PhysicalFitnessTest.create(physicalFitnessTest)
+		.then(data => {
+			res.send(data);
+		})
 		.catch(err => {
 			res.status(500).send({
 				message:
@@ -24,7 +27,7 @@ exports.createPhysicalFitnessTest = function (req, res, doctorid, studentId) {
 		});
 }
 
-// Retrieve all Doctors from the database.
+// Retrieve all PhysicalFitnessTests from the database.
 exports.findAll = (req, res) => {
 
 	PhysicalFitnessTest.findAll()
@@ -39,7 +42,7 @@ exports.findAll = (req, res) => {
 		});
 };
 
-// Find a single Doctor with an id
+// Find a single PhysicalFitnessTests with an id
 exports.findOne = (req, res) => {
 	const id = req.params.id;
 
@@ -51,7 +54,7 @@ exports.findOne = (req, res) => {
 		})
 		.catch(err => {
 			res.status(500).send({
-				message: "Error retrieving User with id=" + id
+				message: "Error retrieving PhysicalFitnessTest with id=" + id
 			});
 		});
 };
