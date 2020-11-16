@@ -48,10 +48,6 @@ function SignIn() {
 
   const [userTypes, setUserTypes] = useState<Array<UserType>>([
     {
-      name: "Estudante",
-      value: 0,
-    },
-    {
       name: "Professor",
       value: 1,
     },
@@ -74,6 +70,10 @@ function SignIn() {
     signUp(params)
       .then((result) => {
         history.push("/signin");
+        alert("Usuário cadastrado com sucesso!");
+      })
+      .catch(() => {
+        alert("Falha ao realizar o cadastro");
       })
       .finally(() => setIsLoading(false));
   }
@@ -117,47 +117,7 @@ function SignIn() {
                     <option value={userType.value}>{userType.name}</option>
                   ))}
                 </Input>
-                {values.userType == 0 ? (
-                  <>
-                    <Input label="Nome" name="name" type="text" />
-                    <Input label="CPF" name="cpf" type="text" />
-                    <Input label="RG" name="rg" type="text" />
-                    <Input label="Nascimento" name="birth_date" type="date" />
-                    <Input
-                      label="Cartão de crédito - Nome"
-                      name="cred_card_name"
-                      type="text"
-                    />
-                    <Input
-                      label="Cartão de crédito - Número"
-                      name="cred_card_number"
-                      type="text"
-                    />
-                    <Input
-                      label="Cartão de crédito - CVV"
-                      name="cred_card_cvv"
-                      type="number"
-                    />
-                    <Input
-                      select
-                      label="Bandeira"
-                      name="cred_card_issuer"
-                      type="text"
-                    >
-                      <option value={undefined} selected>
-                        Escolha a bandeira do cartão
-                      </option>
-                      {cred_card_issuers?.map((cred_card_issuer) => (
-                        <option
-                          key={cred_card_issuer.value}
-                          value={cred_card_issuer.name}
-                        >
-                          {cred_card_issuer.name}
-                        </option>
-                      ))}
-                    </Input>
-                  </>
-                ) : values.userType ? (
+                {values.userType ? (
                   <Input label="Nome" name="name" type="text" />
                 ) : null}
               </InputWrapper>

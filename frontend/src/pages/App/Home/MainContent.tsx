@@ -1,9 +1,21 @@
 import React from "react";
+import PhysicalFitnessTest from "../PhysicalFitnessTest";
+import styled from "styled-components";
 
-// import { Container } from './styles';
+export const MainContentContainer = styled.div`
+  /* max-width: 500px; */
+  display: flex;
+  flex: 1;
 
-function MainContent() {
-  return <div />;
+  justify-content: center;
+`;
+
+interface MainContentProps {
+  children?: React.ReactNode;
+}
+
+function MainContent({ children }: MainContentProps) {
+  return <MainContentContainer>{children}</MainContentContainer>;
 }
 
 export default MainContent;

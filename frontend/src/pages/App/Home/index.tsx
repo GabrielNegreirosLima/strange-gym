@@ -6,13 +6,17 @@ import MainContent from "./MainContent";
 
 import { HomeContainer, ContentWrapper } from "./styles";
 
-function Home() {
+interface HomeProps {
+  children?: React.ReactNode;
+}
+
+function Home({ children }: HomeProps) {
   return (
     <HomeContainer>
       <Header />
       <ContentWrapper>
         <LeftMenu />
-        <MainContent />
+        <MainContent>{children}</MainContent>
       </ContentWrapper>
     </HomeContainer>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -10,29 +11,67 @@ export const LeftMenuContainer = styled.div`
 
   padding: 8px;
 `;
-export const LeftMenuItemContainer = styled.div`
+export const LeftMenuItemContainer = styled.a`
   height: 48px;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+
+  margin-bottom: 8px;
 `;
 export const LeftMenuItemText = styled.span`
   color: #343a40;
+  text-align: left;
 `;
 
 const menuItens = [
   {
     label: "Dashboard",
+    page: "/",
+  },
+  {
+    label: "Cadastro de aluno",
+    page: "/studentSignUp",
+  },
+  {
+    label: "Matricula de aluno",
+    page: "/enrollment",
+  },
+  {
+    label: "Cadastro de plano",
+    page: "/plan",
+  },
+  {
+    label: "Teste de aptidão física (only Doctor)",
+    page: "/physicalFitnessTest",
+  },
+  {
+    label: "Modalidades",
+    page: "/modality",
+  },
+  {
+    label: "Cadastro de horário",
+    page: "/schedule",
+  },
+  {
+    label: "Cadastro de turmas",
+    page: "/class",
+  },
+  {
+    label: "Cadastro de treino (only Teacher)",
+    page: "/training",
   },
 ];
 
-interface LeftMenuItem {
+interface LeftMenuItemProps {
   label: string;
+  page: string;
 }
-function LeftMenuItem({ label }: LeftMenuItem) {
+function LeftMenuItem({ label, page }: LeftMenuItemProps) {
+  const history = useHistory();
   return (
-    <LeftMenuItemContainer>
+    <LeftMenuItemContainer onClick={() => history.push(page)}>
       <LeftMenuItemText>{label}</LeftMenuItemText>
     </LeftMenuItemContainer>
   );
@@ -42,7 +81,7 @@ function LeftMenu() {
   return (
     <LeftMenuContainer>
       {menuItens.map((menu) => (
-        <LeftMenuItem label={menu.label} />
+        <LeftMenuItem label={menu.label} page={menu.page} />
       ))}
     </LeftMenuContainer>
   );

@@ -1,49 +1,39 @@
-export interface House {
-  Immobile: Immobile;
+export interface Student {
+  id: string | number;
+  name: string;
+  cpf: string;
+  rg: string;
+  birth_date: string;
+  cred_card_number: string;
+  cred_card_issuer: string;
+  cred_card_name: string;
+  cred_card_cvv: string;
 }
 
-export interface Apartment {
-  Number: number;
-  QtdDinerRooms: number;
-  Floor: number;
-  PriceCondominium: number;
-  HasDoorman: boolean;
-  Immobile: Immobile;
+export interface Plan {
+  id: string | number;
+  frequency: "2" | "3" | "4" | "5" | "6" | "7";
+  billing_frequency: "monthly" | "semiannual" | "yearly";
+  price: number;
 }
-
-export interface Immobile {
-  Price: number;
-  QtdBedrooms: number;
-  HaveCloset: boolean;
-  Area: number;
-  QtdCarspaces: number;
-  QtdRooms: number;
-  QtdSuites: number;
-  Summary: string;
-  Address: Address;
+export interface Modality {
+  id: string | number;
+  name: string;
 }
-
-export interface Address {
-  Street: string;
-  Number: number;
-  Neighborhood?: Neighborhood;
-  NeighborhoodID?: number;
+export interface Schedule {
+  id: string | number;
+  day_of_week: string;
+  time_initial: string;
+  time_end: string;
 }
-
-export interface Neighborhood {
-  ID?: number;
-  Name?: string;
+export interface Enrollment {
+  id: string | number;
+  plan: Plan;
+  student: Student;
 }
-
-export interface FetchNeighborhoodResponse {
-  CreatedAt: Date;
-  UpdatedAt: Date;
-  DeletedAt: DeletedAt;
-  ID: number;
-  Name: string;
-}
-
-export interface DeletedAt {
-  Time: Date;
-  Valid: boolean;
+export interface Training {
+  id: string | number;
+  description: string;
+  teacherId: string | number;
+  enrollmentId: string | number;
 }
