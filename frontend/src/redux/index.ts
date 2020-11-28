@@ -3,7 +3,6 @@ import {
   combineReducers,
   Action,
   ThunkAction,
-  getDefaultMiddleware,
 } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 
