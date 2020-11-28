@@ -1,14 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
 import Class from "./pages/App/Class";
 import Enrollment from "./pages/App/Enrollment";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/App/Home";
 import Modality from "./pages/App/Modality";
 import PhysicalFitnessTest from "./pages/App/PhysicalFitnessTest";
@@ -19,8 +13,6 @@ import Training from "./pages/App/Training";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
 import { RootState } from "./redux";
-
-// import { Container } from './styles';
 
 function Routes() {
   const { user } = useSelector((state: RootState) => state.auth);
