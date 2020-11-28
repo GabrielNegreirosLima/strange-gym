@@ -1,5 +1,7 @@
 const db = require("../models")
 const Enrollment = db.enrollment
+const Student = db.student
+const Plan = db.plan
 
 // Create a Enrollment
 exports.createEnrollment = function (req, res) {
@@ -25,7 +27,7 @@ exports.createEnrollment = function (req, res) {
 // Retrieve all Enrollment from the database.
 exports.findAll = (req, res) => {
 
-	Enrollment.findAll()
+	Enrollment.findAll({ include: [Student, Plan] })
 		.then(data => {
 			res.send(data);
 		})

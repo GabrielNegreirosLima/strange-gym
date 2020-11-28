@@ -1,5 +1,7 @@
 const db = require("../models")
 const Training = db.training
+const Teacher = db.teacher
+const Enrollment = db.enrollment
 
 // Create a Training
 exports.createTraining = function (req, res) {
@@ -25,7 +27,7 @@ exports.createTraining = function (req, res) {
 // Retrieve all Traininges from the database.
 exports.findAll = (req, res) => {
 
-	Training.findAll()
+	Training.findAll({ include: [Teacher, Enrollment] })
 		.then(data => {
 			res.send(data);
 		})
@@ -42,7 +44,8 @@ exports.findOne = (req, res) => {
 	const id = req.params.id;
 
 	Training.findOne({
-		where: { id: id }
+		where: { id: id },
+		include: [Teacher, Enrollment]
 	})
 		.then(data => {
 			res.send(data);
