@@ -23,7 +23,6 @@ import { RootState } from "./redux";
 
 function Routes() {
 	const { user } = useSelector((state: RootState) => state.auth);
-	console.log({ user });
 	return (
 		<Router>
 			<Switch>
