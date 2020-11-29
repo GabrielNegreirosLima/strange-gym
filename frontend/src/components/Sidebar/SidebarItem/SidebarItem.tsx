@@ -1,14 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 interface LeftMenuItem {
 	label: string;
+	link: string;
 }
 
-const MenuItem: React.FC<LeftMenuItem> = ({ label }) => {
+const MenuItem: React.FC<LeftMenuItem> = ({ label, link }: LeftMenuItem) => {
 	return (
 		<LeftMenuItemContainer>
-			<LeftMenuItemText>{label}</LeftMenuItemText>
+			<Link to={link}>
+				<LeftMenuItemText>{label}</LeftMenuItemText>
+			</Link>
 		</LeftMenuItemContainer>
 	);
 };

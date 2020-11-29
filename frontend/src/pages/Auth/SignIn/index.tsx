@@ -1,11 +1,14 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import { signIn } from "../../../api/auth";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import { SignInSchema } from "../validations";
 
-import { useHistory } from "react-router-dom";
+import { signInSuccess } from "../../../redux/reducers/auth";
 
 import {
 	SignInContainer,
@@ -19,6 +22,7 @@ import ErrorMessage from "../../../components/ErrorMessage";
 
 function SignIn() {
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string | undefined>();
@@ -28,9 +32,11 @@ function SignIn() {
 		if (!username || !password) return;
 
 		setIsLoading(true);
+
 		signIn(username, password)
 			.then((result) => {
-				console.log({ result });
+				console.log(result);
+				dispatch(signInSuccess(result.data));
 				history.push("/");
 			})
 			.catch((err) => {

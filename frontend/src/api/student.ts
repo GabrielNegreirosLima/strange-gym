@@ -5,6 +5,8 @@ export function fetchStudents() {
   return api.get("api/students");
 }
 
+export const getStudents = async () => {
+}
 interface CreateStudent {
   username: string;
   password: string;
