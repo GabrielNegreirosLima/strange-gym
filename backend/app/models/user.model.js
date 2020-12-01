@@ -12,11 +12,11 @@ module.exports = (sequelize, Sequelize) => {
 		// 1 - teacher
 		// 2 - secretary
 		// 3 - doctor
-    	enum_user: {
-	  		type: Sequelize.INTEGER
+		enum_user: {
+			type: Sequelize.INTEGER
 		}
-  	});
+	});
 
-  return User;
+	return User;
 };
 

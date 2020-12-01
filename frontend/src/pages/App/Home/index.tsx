@@ -4,14 +4,14 @@ import Header from "../../../components/Header";
 import MainContent from "./MainContent";
 
 import { HomeContainer, ContentWrapper } from "./styles";
-
-const Home: React.FC = () => {
+interface Props {
+	children?: React.ReactNode;
+}
+const Home: React.FC<Props> = ({ children }: Props) => {
 	return (
 		<HomeContainer>
 			<Header />
-			<ContentWrapper>
-				<MainContent />
-			</ContentWrapper>
+			<ContentWrapper>{children}</ContentWrapper>
 		</HomeContainer>
 	);
 };

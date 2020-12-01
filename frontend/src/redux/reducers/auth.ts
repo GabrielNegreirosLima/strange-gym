@@ -19,15 +19,15 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
-    signInSucess(
+    signInSuccess(
       state: AuthReducerState,
       { payload }: PayloadAction<AuthReducerState>
     ) {
-      state = payload;
+      return { ...payload };
     },
   },
 });
 
-export const { signInSucess } = authSlice.actions;
+export const { signInSuccess } = authSlice.actions;
 
 export default authSlice.reducer;

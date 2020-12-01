@@ -6,6 +6,43 @@ import MenuItem from "./SidebarItem";
 const menuItens = [
 	{
 		label: "Dashboard",
+		link: "/",
+	},
+	{
+		label: "Teste Fisico",
+		link: "/create/fisical-test",
+	},
+	{
+		label: "Cadastrar Studante",
+		link: "/create/student",
+	},
+	{
+		label: "Cadastro Modalidade",
+		link: "/create/modality",
+	},
+	{
+		label: "Matricular Aluno",
+		link: "/create/enrollment",
+	},
+	{
+		label: "Cadastrar Plano",
+		link: "/create/plan",
+	},
+	{
+		link: "/create/class",
+		label: "Cadastrar Turma",
+	},
+	{
+		label: "Cadastrar Treino",
+		link: "/create/drill",
+	},
+	{
+		label: "Cadastrar Cronograma",
+		link: "/create/schedule",
+	},
+	{
+		label: "Cadastrar Funcionário",
+		link: "/signup",
 	},
 ];
 
@@ -27,7 +64,7 @@ const LeftMenu: React.FC<Props> = ({ open, close }) => {
 				<FiX onClick={close} size={23} cursor="pointer" />
 			</Container>
 			{menuItens.map((menu) => (
-				<MenuItem key={menu.label} label={menu.label} />
+				<MenuItem link={menu.link} key={menu.label} label={menu.label} />
 			))}
 		</LeftMenuContainer>
 	);
