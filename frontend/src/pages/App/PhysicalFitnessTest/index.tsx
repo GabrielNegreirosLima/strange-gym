@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { createPhysicalFitnessTest } from "../../../api/physicalFitnessTest";
 import { fetchStudents } from "../../../api/student";
 import { Student } from "../../../api/types";
@@ -19,12 +20,14 @@ import { PhysicalFitnessTestContainer } from "./styles";
 import { PhysicalFitnessTestSchema } from "./validations";
 
 function PhysicalFitnessTest() {
+  const history = useHistory();
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useSelector((state: RootState) => state.auth);
 
   function handleSubmit(values: any) {
+    console.log({ user });
     const newPhysicalFitnessTest = {
       weight: Number(values.weight),
       height: Number(values.height),
@@ -32,16 +35,18 @@ function PhysicalFitnessTest() {
       body_fat_percentage: Number(values.body_fat_percentage),
       body_mass_percentage: Number(values.body_mass_percentage),
       result: values.result,
-      doctorId: Number(user?.id),
+      doctorId: Number(user?.doctor?.id),
       studentId: Number(values.studentId),
     };
 
     createPhysicalFitnessTest({ ...newPhysicalFitnessTest })
       .then((result) => {
         setIsLoading(true);
+        history.push("/");
+        alert("Teste fisico cadastrada com sucesso!");
       })
       .catch((err) => {
-        alert("Deu ruim");
+        alert("Falha ao realizar o cadastro");
       })
       .finally(() => {
         setIsLoading(false);

@@ -21,7 +21,7 @@ export function createPhysicalFitnessTest({
   doctorId,
   studentId,
 }: CreatePhysicalFitnessTest) {
-  return api.post("api/physicalFitnessTest", {
+  return api.post("api/physicalFitnessTests", {
     weight,
     height,
     blood_pressure,

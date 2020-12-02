@@ -14,9 +14,11 @@ exports.createPhysicalFitnessTest = function (req, res) {
 		studentId: req.body.studentId
 	}
 
+	console.log({ physicalFitnessTest })
+
 	PhysicalFitnessTest.create(physicalFitnessTest)
 		.then(data => {
-			res.send(data);
+			res.status(200).send(data);
 		})
 		.catch(err => {
 			res.status(500).send({

@@ -5,6 +5,12 @@ const Student = require("./student.controller.js");
 const Teacher = require("./teacher.controller.js");
 const Secretary = require("./secretary.controller.js");
 const User = db.user;
+const StudentModel = db.student;
+const DoctorModel = db.doctor;
+const TeacherModel = db.teacher;
+const SecretaryModel = db.secretary
+const EnrollmentModel = db.enrollment
+
 const Role = db.role;
 
 const Op = db.Sequelize.Op;
@@ -67,7 +73,7 @@ exports.signin = (req, res) => {
 			username: req.body.username
 		}
 	})
-		.then(user => {
+		.then(async user => {
 			if (!user) {
 				return res.status(404).send({ message: "User Not found." });
 			}
@@ -88,10 +94,51 @@ exports.signin = (req, res) => {
 				expiresIn: 86400 // 24 hours
 			});
 
-			const { id, username, enum_user } = user;
+
+			switch (user.enum_user) {
+				case 0:
+					const student = await StudentModel.findOne({
+						where: {
+							userId: user.id
+						}
+					})
+
+					const enroment = await EnrollmentModel.findOne({
+						where: {
+							studentId: student.id
+						}
+					})
+
+					user = { id: user.id, username: user.username, enum_user: user.enum_user, student: student, enrollment: enroment }
+					break;
+				case 1:
+					const teacher = await TeacherModel.findOne({
+						where: {
+							userId: user.id
+						}
+					})
+					user = { id: user.id, username: user.username, enum_user: user.enum_user, teacher: teacher }
+					break;
+				case 2:
+					const secretary = await SecretaryModel.findOne({
+						where: {
+							userId: user.id
+						}
+					})
+					user = { id: user.id, username: user.username, enum_user: user.enum_user, secretary: secretary }
+					break;
+				case 3:
+					const doctor = await DoctorModel.findOne({
+						where: {
+							userId: user.id
+						}
+					})
+					user = { id: user.id, username: user.username, enum_user: user.enum_user, doctor: doctor }
+					break;
+			}
 
 			res.status(200).send({
-				user: { id, username, enum_user },
+				user: user,
 				accessToken: token
 			});
 		})
