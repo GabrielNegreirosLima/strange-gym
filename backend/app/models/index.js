@@ -31,7 +31,7 @@ db.modality = require("./modality.model.js")(sequelize, Sequelize);
 db.schedule = require("./schedule.model.js")(sequelize, Sequelize);
 db.class = require("./class.model.js")(sequelize, Sequelize);
 db.enrollmentClass = require("./enrollment-class.model.js")(sequelize, Sequelize);
-db.training = require("./tranning.model.js")(sequelize, Sequelize);
+db.training = require("./training.model.js")(sequelize, Sequelize);
 
 db.doctor.belongsTo(db.user);
 db.student.belongsTo(db.user);

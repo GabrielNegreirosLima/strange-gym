@@ -28,8 +28,8 @@ function Training() {
       setIsLoading(true);
       const newTraining = {
         description: values.description,
-        teacherId: user.id,
-        enrollmentId: values.enrollmentId,
+        teacherId: user?.teacher?.id,
+        enrollmentId: Number(values.enrollmentId),
       };
 
       createTraining({ ...newTraining })

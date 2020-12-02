@@ -6,5 +6,6 @@ module.exports = app => {
 
 	router.get("/", physicalFitnessTests.findAll);
 	router.get("/:id", physicalFitnessTests.findOne);
+	router.post("/", physicalFitnessTests.createPhysicalFitnessTest);
 	app.use('/api/physicalFitnessTests', router);
 };

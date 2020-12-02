@@ -4,6 +4,10 @@ interface User {
   enum_user: number;
   id: number;
   username: string;
+  doctor?: any;
+  student?: any;
+  secretary?: any;
+  teacher?: any;
 }
 interface AuthReducerState {
   accessToken: string | null;

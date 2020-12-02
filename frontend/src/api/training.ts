@@ -11,6 +11,9 @@ export function fetchTrainings() {
   return api.get("api/trainings");
 }
 
+export function fetchTrainingsById(id: number) {
+  return api.get(`api/trainings/${id}`);
+}
 export function createTraining({
   description,
   teacherId,

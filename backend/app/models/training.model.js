@@ -1,10 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
-	const Tranning = sequelize.define("tranning", {
+	const Training = sequelize.define("training", {
 		description: {
 			type: Sequelize.TEXT
-		}	
+		}
 	});
 
-	return Tranning;
+	return Training;
 };
 

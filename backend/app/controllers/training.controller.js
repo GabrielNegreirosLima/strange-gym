@@ -5,13 +5,15 @@ const Enrollment = db.enrollment
 
 // Create a Training
 exports.createTraining = function (req, res) {
-	const Training = {
+	const newTraining = {
 		description: req.body.description,
 		teacherId: req.body.teacherId,
 		enrollmentId: req.body.enrollmentId
 	}
 
-	Training.create(Training)
+	console.log({ newTraining })
+
+	Training.create(newTraining)
 		.then(data => {
 			res.send(data);
 		})
@@ -45,6 +47,23 @@ exports.findOne = (req, res) => {
 
 	Training.findOne({
 		where: { id: id },
+		include: [Teacher, Enrollment]
+	})
+		.then(data => {
+			res.send(data);
+		})
+		.catch(err => {
+			res.status(500).send({
+				message: "Error retrieving Training with id=" + id
+			});
+		});
+};
+
+exports.findOneByStudentId = (req, res) => {
+	const id = req.params.id;
+
+	Training.findOne({
+		where: { enrollment: id },
 		include: [Teacher, Enrollment]
 	})
 		.then(data => {
